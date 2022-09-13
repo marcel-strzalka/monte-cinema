@@ -1,0 +1,19 @@
+<%= form_with model: movie do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %><br>
+    <% movie.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :length_in_minutes %><br>
+    <%= form.number_field :length_in_minutes, in: 1..300 %>
+    <% movie.errors.full_messages_for(:length_in_minutes).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
