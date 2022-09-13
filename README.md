@@ -4,9 +4,17 @@ Create database:
 
 `$ bin/rails db:create`
 
+Create database and add data from `seeds.rb` into it
+
+`$ bin/rails db:setup`
+
 Drop database:
 
 `$ bin/rails db:drop`
+
+Add data from `seeds.rb` into already existing database
+
+`$ bin/rails db:seed`
 
 Start server:
 
