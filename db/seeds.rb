@@ -14,3 +14,19 @@ Movie.create!([{
 }])
 
 p "Successfully created #{Movie.count} Movies"
+
+if Rails.env == "development"
+  User.destroy_all
+
+  User.create!([{
+    email: "customer@cinema.com",
+    password: "123456",
+    role: "customer"
+  }, {
+    email: "manager@cinema.com",
+    password: "123456",
+    role: "manager"
+  }])
+
+  p "Successfully created #{User.count} Users"
+end
