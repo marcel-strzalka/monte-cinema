@@ -1,4 +1,4 @@
 class CinemaHall < ApplicationRecord
-  validates :name, length: { minimum: 1 }
-  validates :capacity, numericality: { greater_than: 0 }
+  validates :name, uniqueness: true, length: { minimum: 1 }
+  validates :capacity, numericality: { only_integer: true, greater_than: 0 }
 end
