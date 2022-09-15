@@ -200,7 +200,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
-  devise
+  devise (~> 4.8.1)
   importmap-rails
   jbuilder
   pg (~> 1.1)
