@@ -64,8 +64,8 @@ group :development do
   # gem "spring"
 
   # Static analyzers, linters and similar
-  gem "brakeman"
-  gem "rubocop"
-  gem "lefthook"
+  gem "brakeman", "~> 5.3.1"
+  gem "rubocop", "~> 1.36.0"
+  gem "lefthook", "~> 1.1.1"
 end
 
