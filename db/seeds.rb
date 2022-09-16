@@ -1,6 +1,6 @@
-CinemaHall.destroy_all
+Hall.destroy_all
 
-CinemaHall.create!([
+Hall.create!([
   {
     name: "A1",
     capacity: 20
@@ -43,7 +43,7 @@ CinemaHall.create!([
   }
 ])
 
-p "Successfully created #{CinemaHall.count} Cinema Halls"
+p "Successfully created #{Hall.count} Halls"
 
 Movie.destroy_all
 

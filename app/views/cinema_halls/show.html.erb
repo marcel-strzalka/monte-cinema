@@ -1,6 +1,0 @@
-<h1>Cinema Hall "<%= @cinema_hall.name %>"</h1>
-<p>Number of seats: <%= @cinema_hall.capacity %></p>
-
-<div><%= link_to "Back", cinema_halls_path %></div>
-<div><%= link_to "Edit", edit_cinema_hall_path(@cinema_hall) %></div>
-<div><%= button_to "Delete", { action: "destroy", id: @cinema_hall.id }, method: :delete %></div>

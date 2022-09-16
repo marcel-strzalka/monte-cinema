@@ -1,15 +1,15 @@
-<%= form_with model: cinema_hall do |form| %>
+<%= form_with model: hall do |form| %>
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %><br>
-    <% cinema_hall.errors.full_messages_for(:name).each do |message| %>
+    <% hall.errors.full_messages_for(:name).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>
   <div>
     <%= form.label :capacity %><br>
     <%= form.number_field :capacity, min: 1 %>
-    <% cinema_hall.errors.full_messages_for(:capacity).each do |message| %>
+    <% hall.errors.full_messages_for(:capacity).each do |message| %>
       <div><%= message %></div>
     <% end %>
   </div>

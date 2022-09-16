@@ -1,9 +1,0 @@
-<h1>Cinema Halls</h1>
-
-<ul>
-  <% @cinema_halls.each do |cinema_hall| %>
-    <li><%= link_to "#{cinema_hall.name} (#{cinema_hall.capacity} seats)", cinema_hall %></li>
-  <% end %>
-</ul>
-
-<%= link_to "Add new cinema hall", new_cinema_hall_path %>
