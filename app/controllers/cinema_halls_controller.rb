@@ -1,10 +1,11 @@
 class CinemaHallsController < ApplicationController
+  before_action :find_cinema_hall, only: %i[ show edit update destroy ]
+
   def index
     @cinema_halls = CinemaHall.all
   end
 
   def show
-    @cinema_hall = CinemaHall.find(params[:id])
   end
 
   def new
@@ -22,12 +23,9 @@ class CinemaHallsController < ApplicationController
   end
 
   def edit
-    @cinema_hall = CinemaHall.find(params[:id])
   end
 
   def update
-    @cinema_hall = CinemaHall.find(params[:id])
-
     if @cinema_hall.update(cinema_hall_params)
       redirect_to @cinema_hall
     else 
@@ -36,7 +34,6 @@ class CinemaHallsController < ApplicationController
   end
 
   def destroy
-    @cinema_hall = CinemaHall.find(params[:id])
     @cinema_hall.destroy
 
     redirect_to cinema_halls_path, status: :see_other
@@ -46,5 +43,9 @@ class CinemaHallsController < ApplicationController
 
   def cinema_hall_params
     params.require(:cinema_hall).permit(:name, :capacity)
+  end
+
+  def find_cinema_hall
+    @cinema_hall = CinemaHall.find(params[:id])
   end
 end
