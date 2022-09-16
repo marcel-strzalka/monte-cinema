@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 class HallsController < ApplicationController
-  before_action :find_hall, only: %i[ show edit update destroy ]
+  before_action :find_hall, only: %i[show edit update destroy]
 
   def index
     @halls = Hall.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @hall = Hall.new
@@ -22,13 +23,12 @@ class HallsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @hall.update(hall_params)
       redirect_to @hall
-    else 
+    else
       render :edit, status: :unprocessable_entity
     end
   end

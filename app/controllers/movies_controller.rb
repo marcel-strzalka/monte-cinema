@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   def index
     @movies = Movie.all
@@ -30,7 +32,7 @@ class MoviesController < ApplicationController
 
     if @movie.update(movie_params)
       redirect_to @movie
-    else 
+    else
       render :edit, status: :unprocessable_entity
     end
   end
