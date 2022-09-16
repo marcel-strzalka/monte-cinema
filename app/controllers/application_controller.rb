@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  def is_customer?
+  def customer?
     current_user&.customer?
   end
 
-  def is_manager?
+  def manager?
     current_user&.manager?
   end
 end
