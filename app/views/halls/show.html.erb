@@ -1,0 +1,6 @@
+<h1>Hall "<%= @hall.name %>"</h1>
+<p>Number of seats: <%= @hall.capacity %></p>
+
+<div><%= link_to "Back", halls_path %></div>
+<div><%= link_to "Edit", edit_hall_path(@hall) %></div>
+<div><%= button_to "Delete", { action: "destroy", id: @hall.id }, method: :delete %></div>

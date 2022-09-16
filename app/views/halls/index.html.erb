@@ -1,0 +1,9 @@
+<h1>Halls</h1>
+
+<ul>
+  <% @halls.each do |hall| %>
+    <li><%= link_to "#{hall.name} (#{hall.capacity} seats)", hall %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Add new hall", new_hall_path %>

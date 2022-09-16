@@ -1,0 +1,2 @@
+module CinemaHallsHelper
+end
