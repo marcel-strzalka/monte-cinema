@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  before_action except: %i[index show] do
+    redirect_to movies_path unless manager?
+  end
+
   def index
     @movies = Movie.all
   end
