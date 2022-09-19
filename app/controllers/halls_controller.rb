@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class HallsController < ApplicationController
+  before_action except: %i[index show] do
+    redirect_to halls_path unless manager?
+  end
   before_action :find_hall, only: %i[show edit update destroy]
 
   def index
