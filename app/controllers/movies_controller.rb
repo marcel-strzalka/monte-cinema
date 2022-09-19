@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  before_action :find_movie, only: %i[show edit update destroy]
+
   def index
     @movies = Movie.all
   end
 
-  def show
-    @movie = Movie.find(params[:id])
-  end
+  def show; end
 
   def new
     @movie = Movie.new
@@ -23,13 +23,9 @@ class MoviesController < ApplicationController
     end
   end
 
-  def edit
-    @movie = Movie.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @movie = Movie.find(params[:id])
-
     if @movie.update(movie_params)
       redirect_to @movie
     else
@@ -38,7 +34,6 @@ class MoviesController < ApplicationController
   end
 
   def destroy
-    @movie = Movie.find(params[:id])
     @movie.destroy
 
     redirect_to movies_path, status: :see_other
@@ -48,5 +43,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :length_in_minutes)
+  end
+
+  def find_movie
+    @movie = Movie.find(params[:id])
   end
 end
