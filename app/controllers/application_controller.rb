@@ -8,4 +8,6 @@ class ApplicationController < ActionController::Base
   def manager?
     current_user&.manager?
   end
+
+  helper_method :customer?, :manager?
 end
