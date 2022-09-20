@@ -33,5 +33,9 @@ module MonteCinema
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Polish time zone
+    config.time_zone = 'Warsaw'
+    config.active_record.default_timezone = :local
   end
 end
