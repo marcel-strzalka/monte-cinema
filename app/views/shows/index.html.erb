@@ -1,0 +1,16 @@
+<h1>Today Shows</h1>
+
+<div>
+  <% @movies.each do |movie| %>
+  <h1><%= movie.title %></h1>
+  <ul>
+    <% Show.today_shows(movie).each do |show| %>
+      <li><%= link_to pretty_time(show.start_time), show %></li>
+    <% end %>
+  </ul>
+<% end %>
+</div>
+
+<% if manager? %>
+  <%= link_to "Add new show", new_show_path %>
+<% end %>

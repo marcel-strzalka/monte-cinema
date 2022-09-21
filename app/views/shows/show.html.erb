@@ -1,0 +1,12 @@
+<h1><%= @show.movie.title %></h1>
+
+<div>
+  Movie "<%= @show.movie.title %>" will be played inside of hall "<%= @show.hall.name %>",
+  today at <%= pretty_time @show.start_time %> and will end approximately 
+  at <%= pretty_time @show.end_time %>.
+</div>
+
+<div><%= link_to "Back", shows_path %></div>
+<% if manager? %>
+  <div><%= button_to "Delete", { action: "destroy", id: @show.id }, method: :delete %></div>
+<% end %>

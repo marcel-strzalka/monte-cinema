@@ -1,0 +1,28 @@
+<%= form_with model: show do |form| %>
+  <div>
+    <div><%= form.label :hall_id %></div>
+    <div>
+      <%= form.collection_select :hall_id, Hall.sorted_alphabetically, :id, :name, prompt: "Please select hall" %>
+    </div>
+  </div>
+   <div>
+    <div><%= form.label :movie_id %></div>
+    <div>
+      <%= form.collection_select :movie_id, Movie.sorted_alphabetically, :id, :title, prompt: "Please select movie" %>
+    </div>
+  </div>
+  <div>
+    <div><%= form.label :start_time %></div>
+    <div>
+      <%= form.datetime_local_field :start_time %>
+    </div>
+  </div>
+  <div>
+    <% show.errors.any? do |error| %>
+      <%= error.full_message %>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
