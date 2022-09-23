@@ -2,14 +2,30 @@
 
 class TimePeriodDoesntOverlap
   def self.validate(show)
-    shows = Show.where(hall_id: show.hall)
+    new(show).validate
+  end
 
-    overlaps = shows.any? do |other|
-      show.time_period.overlaps?(other.time_period)
-    end
+  def validate
+    overlaps = overlaps?
 
-    show.errors.add(:overlapping_time_period, 'cannot be added') if overlaps
+    @show.errors.add(:overlapping_time_period, 'cannot be added') if overlaps
 
     !overlaps
+  end
+
+  private
+
+  def initialize(show)
+    @show = show
+  end
+
+  def shows
+    Show.where(hall: @show.hall)
+  end
+
+  def overlaps?
+    shows.any? do |other|
+      @show.time_period.overlaps?(other.time_period)
+    end
   end
 end
