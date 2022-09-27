@@ -1,0 +1,21 @@
+<%= form_with url: show_reservations_path do |f| %>
+  <div>
+    <div><%= f.label :seat_numbers %></div>
+    <div>
+      <%= f.collection_check_boxes :seat_numbers, @seats, :number, :number, include_hidden: false do |b| %>
+        <%= b.check_box disabled: !b.object.available %>
+        <%= b.label %>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <% reservation.errors.any? do |error| %>
+      <%= error.full_message %>
+    <% end %>
+  </div>
+  <div>
+    <%= f.submit "Book reservation" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", show_path(id: @reservation.show.id) %>
