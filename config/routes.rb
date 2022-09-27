@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :halls
   resources :movies
   resources :shows, except: [:edit, :update] do
-    resources :reservations, only: [:index, :show, :new, :create] do
+    resources :reservations, only: [:show, :new, :create] do
       put 'confirm', on: :member
       delete 'cancel', on: :member
     end
