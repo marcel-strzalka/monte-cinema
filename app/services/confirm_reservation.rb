@@ -10,7 +10,7 @@ class ConfirmReservation
 
   private
 
-  def initialize(reservation)
+  def initialize(reservation:)
     @reservation = reservation
   end
 

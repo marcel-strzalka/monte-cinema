@@ -12,24 +12,24 @@ class ReservationsController < ApplicationController
   def new
     show = Show.find(params[:show_id])
     @reservation = Reservation.new(show:, user: current_user)
-    @seats = ShowAllSeats.new(show).call
+    @seats = ShowAllSeats.new(show:).call
   end
 
   def create
     show = Show.find(params[:show_id])
     @reservation = Reservation.new(show:, user: current_user)
 
-    if CreateReservation.new(@reservation, params).call
+    if CreateReservation.new(reservation: @reservation, params:).call
       redirect_to show_reservation_path(show_id: show.id, id: @reservation.id)
     else
-      @seats = ShowAllSeats.new(show).call
+      @seats = ShowAllSeats.new(show:).call
       render :new, status: :unprocessable_entity
     end
   end
 
   def cancel
     reservation = find_reservation
-    CancelReservation.new(reservation).call
+    CancelReservation.new(reservation:).call
 
     path = show_reservation_path(show_id: reservation.show, id: reservation.id)
     redirect_to path, notice: 'Your reservation has been cancelled.'
@@ -37,7 +37,7 @@ class ReservationsController < ApplicationController
 
   def confirm
     reservation = find_reservation
-    ConfirmReservation.new(reservation).call
+    ConfirmReservation.new(reservation:).call
 
     path = show_reservation_path(show_id: reservation.show, id: reservation.id)
     redirect_to path, notice: 'Your reservation has been confirmed.'

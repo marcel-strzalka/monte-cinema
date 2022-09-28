@@ -12,7 +12,7 @@ class ShowTakenSeats
 
   private
 
-  def initialize(show)
+  def initialize(show:)
     @show = show
   end
 

@@ -28,7 +28,7 @@ class CreateReservation
     true
   end
 
-  def initialize(reservation, params)
+  def initialize(reservation:, params:)
     @reservation = reservation
     @seat_numbers = params.key?(:seat_numbers) ? params[:seat_numbers].map(&:to_i) : []
   end

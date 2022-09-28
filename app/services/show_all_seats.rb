@@ -18,7 +18,7 @@ class ShowAllSeats
 
   private
 
-  def initialize(show)
+  def initialize(show:)
     @show = show
   end
 
