@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class CreateReservation
-  def initialize(reservation:, params:)
+  def initialize(reservation:, seat_numbers:)
     @reservation = reservation
-    @seat_numbers = params.key?(:seat_numbers) ? params[:seat_numbers].map(&:to_i) : []
+    @seat_numbers = seat_numbers&.map(&:to_i) || []
   end
 
   def call

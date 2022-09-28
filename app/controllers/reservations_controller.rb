@@ -19,7 +19,7 @@ class ReservationsController < ApplicationController
     show = Show.find(params[:show_id])
     @reservation = Reservation.new(show:, user: current_user)
 
-    if CreateReservation.new(reservation: @reservation, params:).call
+    if CreateReservation.new(reservation: @reservation, seat_numbers: params[:seat_numbers]).call
       redirect_to show_reservation_path(show_id: show.id, id: @reservation.id)
     else
       @seats = ShowAllSeats.new(show:).call
