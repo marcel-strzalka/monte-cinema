@@ -8,5 +8,5 @@ Rails.application.routes.draw do
       delete 'cancel', on: :member
     end
   end
-  root 'movies#index'
+  root to: 'shows#index'
 end
