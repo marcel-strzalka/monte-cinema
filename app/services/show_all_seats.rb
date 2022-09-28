@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ShowAllSeats
+  def initialize(show:)
+    @show = show
+  end
+
   def call
     seats = []
 
@@ -17,10 +21,6 @@ class ShowAllSeats
   end
 
   private
-
-  def initialize(show:)
-    @show = show
-  end
 
   attr_reader :show
 end

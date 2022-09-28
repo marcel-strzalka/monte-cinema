@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class ShowTakenSeats
+  def initialize(show:)
+    @show = show
+  end
+
   def call
     Ticket
       .select(:seat_number)
@@ -11,10 +15,6 @@ class ShowTakenSeats
   end
 
   private
-
-  def initialize(show:)
-    @show = show
-  end
 
   attr_reader :show
 end

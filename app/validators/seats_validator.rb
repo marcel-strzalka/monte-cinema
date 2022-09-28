@@ -18,6 +18,15 @@ class SeatsValidator
     true
   end
 
+  def initialize(reservation, seat_numbers)
+    @reservation = reservation
+    @seat_numbers = seat_numbers
+
+    show = reservation.show
+    @taken_seats = ShowTakenSeats.new(show:).call
+    @capacity = show.hall.capacity
+  end
+
   private
 
   def invalid?
@@ -40,15 +49,6 @@ class SeatsValidator
     end
 
     false
-  end
-
-  def initialize(reservation, seat_numbers)
-    @reservation = reservation
-    @seat_numbers = seat_numbers
-
-    show = reservation.show
-    @taken_seats = ShowTakenSeats.new(show:).call
-    @capacity = show.hall.capacity
   end
 
   attr_reader :reservation, :seat_numbers, :taken_seats, :capacity

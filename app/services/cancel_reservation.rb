@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class CancelReservation
+  def initialize(reservation:)
+    @reservation = reservation
+  end
+
   def call
     return unless reservation.booked?
 
@@ -9,10 +13,6 @@ class CancelReservation
   end
 
   private
-
-  def initialize(reservation:)
-    @reservation = reservation
-  end
 
   attr_reader :reservation
 end
