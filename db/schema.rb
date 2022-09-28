@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_19_113710) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_23_071605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_113710) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "show_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["show_id"], name: "index_reservations_on_show_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
   create_table "shows", force: :cascade do |t|
     t.bigint "hall_id", null: false
     t.bigint "movie_id", null: false
@@ -37,6 +47,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_113710) do
     t.datetime "updated_at", null: false
     t.index ["hall_id"], name: "index_shows_on_hall_id"
     t.index ["movie_id"], name: "index_shows_on_movie_id"
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.bigint "reservation_id", null: false
+    t.integer "seat_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["reservation_id"], name: "index_tickets_on_reservation_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,6 +70,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_19_113710) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reservations", "shows"
+  add_foreign_key "reservations", "users"
   add_foreign_key "shows", "halls"
   add_foreign_key "shows", "movies"
+  add_foreign_key "tickets", "reservations"
 end

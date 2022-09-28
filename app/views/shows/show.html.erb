@@ -6,6 +6,7 @@
   at <%= formatted_time @show.end_time %>.
 </div>
 
+<div><%= link_to "Make reservation", new_show_reservation_path(@show) %></div>
 <div><%= link_to "Back", shows_path %></div>
 <% if manager? %>
   <div><%= button_to "Delete", { action: "destroy", id: @show.id }, method: :delete %></div>

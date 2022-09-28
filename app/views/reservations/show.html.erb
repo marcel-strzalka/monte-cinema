@@ -1,0 +1,22 @@
+<h1>Reservation #<%= @reservation.id %> for "<%= @reservation.show.movie.title %>"</h1>
+<p>
+  Movie begins at <%= formatted_time(@reservation.show.start_time) %>
+  on <%= formatted_date(@reservation.show.start_time) %>
+  in hall "<%= @reservation.show.hall.name %>".
+</p>
+
+<h2>Your tickets:</h2>
+<ol>
+  <% @reservation.tickets.each do |ticket| %>
+    <li>Seat: "<%= ticket.seat_number %>"</li>
+  <% end %>
+</ol>
+
+<h3>Status: <%= @reservation.status %></h3>
+
+<% if @reservation.booked? %>
+  <%= button_to "Confirm reservation", { action: "confirm", show_id: @reservation.show.id, id: @reservation.id }, method: :put %>
+  <%= button_to "Cancel reservation", { action: "cancel", show_id: @reservation.show.id, id: @reservation.id }, method: :delete %>
+<% end %>
+
+<%= link_to "Back", show_path(id: @reservation.show.id) %>
