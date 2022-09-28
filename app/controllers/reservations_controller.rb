@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
   def new
     show = Show.find(params[:show_id])
     @reservation = Reservation.new(show:, user: current_user)
-    @seats = ShowAllSeats.new(show:).call
+    @seats = GetAllSeats.new(show:).call
   end
 
   def create
@@ -22,7 +22,7 @@ class ReservationsController < ApplicationController
     if CreateReservation.new(reservation: @reservation, seat_numbers: params[:seat_numbers]).call
       redirect_to show_reservation_path(show_id: show.id, id: @reservation.id)
     else
-      @seats = ShowAllSeats.new(show:).call
+      @seats = GetAllSeats.new(show:).call
       render :new, status: :unprocessable_entity
     end
   end

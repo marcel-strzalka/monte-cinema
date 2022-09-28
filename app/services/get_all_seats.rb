@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ShowAllSeats
+class GetAllSeats
   def initialize(show:)
     @show = show
   end
