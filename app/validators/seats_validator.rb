@@ -23,7 +23,7 @@ class SeatsValidator
     @seat_numbers = seat_numbers
 
     show = reservation.show
-    @taken_seats = ShowTakenSeats.new(show:).call
+    @taken_seats = Ticket.taken_seat_numbers(show)
     @capacity = show.hall.capacity
   end
 

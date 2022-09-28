@@ -8,14 +8,11 @@ class ShowAllSeats
   def call
     seats = []
 
-    taken_seat_numbers = Ticket
-      .select(:seat_number)
-      .joins(:reservation)
-      .where(reservations: { show: })
-      .where.not(reservations: { status: :canceled })
-      .map(&:seat_number)
+    taken_seat_numbers = Ticket.taken_seat_numbers(show)
 
-    (1..show.hall.capacity).each { |number| seats << Seat.new(number:, available: taken_seat_numbers.exclude?(number)) }
+    (1..show.hall.capacity).each do |number|
+      seats << Seat.new(number:, available: taken_seat_numbers.exclude?(number))
+    end
 
     seats
   end
