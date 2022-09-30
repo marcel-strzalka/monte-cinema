@@ -12,5 +12,8 @@
 </div>
 
 <% if manager? %>
-  <%= link_to "Add new show", new_show_path %>
+  <div><%= link_to "Add new show", new_show_path %></div>
 <% end %>
+
+<div><%= link_to "See all movies", movies_path %></div>
+<div><%= link_to "See all halls", halls_path %></div>

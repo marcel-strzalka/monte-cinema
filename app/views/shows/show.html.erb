@@ -1,13 +1,15 @@
 <h1><%= @show.movie.title %></h1>
 
 <div>
-  Movie "<%= @show.movie.title %>" will be played inside of hall "<%= @show.hall.name %>",
-  today at <%= formatted_time @show.start_time %> and will end approximately 
-  at <%= formatted_time @show.end_time %>.
+  Movie will be played inside of hall "<%= @show.hall.name %>",
+  starting at <%= formatted_time @show.start_time %> and ending
+  around <%= formatted_time @show.end_time %>.
 </div>
 
 <div><%= link_to "Make reservation", new_show_reservation_path(@show) %></div>
-<div><%= link_to "Back", shows_path %></div>
+
 <% if manager? %>
-  <div><%= button_to "Delete", { action: "destroy", id: @show.id }, method: :delete %></div>
+  <div><%= link_to "Delete", show_path(@show), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
 <% end %>
+
+<div><%= link_to "Back", shows_path %></div>
