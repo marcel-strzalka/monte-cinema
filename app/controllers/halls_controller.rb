@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
 class HallsController < ApplicationController
-  before_action except: %i[index show] do
-    redirect_to halls_path unless manager?
-  end
-  before_action :find_hall, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
+  after_action :verify_authorized, except: %i[index show]
 
   def index
-    @halls = Hall.all
+    @halls = authorize Hall.all
   end
 
-  def show; end
+  def show
+    authorize find_hall
+  end
 
   def new
-    @hall = Hall.new
+    @hall = authorize Hall.new
   end
 
   def create
-    @hall = Hall.new(hall_params)
+    @hall = authorize Hall.new(hall_params)
 
     if @hall.save
       redirect_to @hall
@@ -26,9 +26,13 @@ class HallsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize find_hall
+  end
 
   def update
+    authorize find_hall
+
     if @hall.update(hall_params)
       redirect_to @hall
     else
@@ -37,6 +41,8 @@ class HallsController < ApplicationController
   end
 
   def destroy
+    authorize find_hall
+
     @hall.destroy
 
     redirect_to halls_path, status: :see_other
