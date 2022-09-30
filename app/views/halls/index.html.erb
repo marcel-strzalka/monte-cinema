@@ -6,7 +6,7 @@
   <% end %>
 </ul>
 
-<% if manager? %>
+<% if policy(@halls).new? %>
   <div><%= link_to "Add new hall", new_hall_path %></div>
 <% end %>
 
