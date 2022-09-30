@@ -1,8 +1,9 @@
 <h1><%= @movie.title %></h1>
 <p>Duration: <%= @movie.length_in_minutes %> minutes</p>
 
-<div><%= link_to "Back", movies_path %></div>
 <% if manager? %>
   <div><%= link_to "Edit", edit_movie_path(@movie) %></div>
-  <div><%= button_to "Delete", { action: "destroy", id: @movie.id }, method: :delete %></div>
+  <div><%= link_to "Delete", movie_path(@movie), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
 <% end %>
+
+<div><%= link_to "Back", movies_path %></div>

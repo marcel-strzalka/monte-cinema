@@ -1,16 +1,15 @@
 <%= form_with model: movie do |form| %>
   <div>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %><br>
-    <% movie.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
+    <div><%= form.label :title %></div>
+    <div><%= form.text_field :title %></div>
   </div>
   <div>
-    <%= form.label :length_in_minutes %><br>
-    <%= form.number_field :length_in_minutes, in: 1..300 %>
-    <% movie.errors.full_messages_for(:length_in_minutes).each do |message| %>
-      <div><%= message %></div>
+    <div><%= form.label :length_in_minutes %></div>
+    <div><%= form.number_field :length_in_minutes, in: 1..300 %></div>
+  </div>
+  <div>
+    <% movie.errors.any? do |error| %>
+      <%= error.full_message %>
     <% end %>
   </div>
   <div>

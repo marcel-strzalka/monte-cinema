@@ -2,10 +2,12 @@
 
 <ul>
   <% @movies.each do |movie| %>
-    <li><%= link_to "#{movie.title} (#{movie.length_in_minutes}m)", movie %></li>
+    <li><%= link_to movie.title, movie %></li>
   <% end %>
 </ul>
 
 <% if manager? %>
-  <%= link_to "Add new movie", new_movie_path %>
+  <div><%= link_to "Add new movie", new_movie_path %></div>
 <% end %>
+
+<div><%= link_to "Back", shows_path %></div>
