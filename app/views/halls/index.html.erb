@@ -2,10 +2,12 @@
 
 <ul>
   <% @halls.each do |hall| %>
-    <li><%= link_to "#{hall.name} (#{hall.capacity} seats)", hall %></li>
+    <li><%= link_to hall.name, hall %></li>
   <% end %>
 </ul>
 
 <% if manager? %>
   <%= link_to "Add new hall", new_hall_path %>
 <% end %>
+
+<%= link_to "Back", shows_path %>

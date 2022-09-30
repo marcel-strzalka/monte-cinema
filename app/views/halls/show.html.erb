@@ -1,8 +1,9 @@
 <h1>Hall "<%= @hall.name %>"</h1>
 <p>Number of seats: <%= @hall.capacity %></p>
 
-<div><%= link_to "Back", halls_path %></div>
 <% if manager? %>
   <div><%= link_to "Edit", edit_hall_path(@hall) %></div>
-  <div><%= button_to "Delete", { action: "destroy", id: @hall.id }, method: :delete %></div>
+  <div><%= link_to "Delete", hall_path(@hall), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
 <% end %>
+
+<div><%= link_to "Back", halls_path %></div>
