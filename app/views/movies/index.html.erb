@@ -6,7 +6,7 @@
   <% end %>
 </ul>
 
-<% if manager? %>
+<% if policy(@movies).new? %>
   <div><%= link_to "Add new movie", new_movie_path %></div>
 <% end %>
 
