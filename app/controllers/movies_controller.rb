@@ -1,23 +1,22 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  before_action except: %i[index show] do
-    redirect_to movies_path unless manager?
-  end
-  before_action :find_movie, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @movies = Movie.all
+    @movies = authorize Movie.all
   end
 
-  def show; end
+  def show
+    authorize find_movie
+  end
 
   def new
-    @movie = Movie.new
+    @movie = authorize Movie.new
   end
 
   def create
-    @movie = Movie.new(movie_params)
+    @movie = authorize Movie.new(movie_params)
 
     if @movie.save
       redirect_to @movie
@@ -26,9 +25,13 @@ class MoviesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize find_movie
+  end
 
   def update
+    authorize find_movie
+
     if @movie.update(movie_params)
       redirect_to @movie
     else
@@ -37,6 +40,8 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    authorize find_movie
+
     @movie.destroy
 
     redirect_to movies_path, status: :see_other
