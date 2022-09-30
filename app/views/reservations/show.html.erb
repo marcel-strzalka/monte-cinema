@@ -15,8 +15,21 @@
 <h3>Status: <%= @reservation.status %></h3>
 
 <% if @reservation.booked? %>
-  <%= button_to "Confirm reservation", { action: "confirm", show_id: @reservation.show.id, id: @reservation.id }, method: :put %>
-  <%= button_to "Cancel reservation", { action: "cancel", show_id: @reservation.show.id, id: @reservation.id }, method: :delete %>
+  <% if manager? %>
+    <div>
+      <%=
+        link_to "Confirm reservation",
+        confirm_show_reservation_path(show_id: @reservation.show.id, id: @reservation.id),
+        data: { turbo_method: :put, turbo_confirm: "Are you sure?" }
+      %>
+    </div>
+  <% end %>
+  <div>
+    <%=
+      link_to "Cancel reservation", 
+      cancel_show_reservation_path(show_id: @reservation.show.id, id: @reservation.id),
+      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  </div>
 <% end %>
 
-<%= link_to "Back", show_path(id: @reservation.show.id) %>
+<div><%= link_to "Back", show_path(id: @reservation.show.id) %></div>

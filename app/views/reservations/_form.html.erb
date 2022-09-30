@@ -1,8 +1,8 @@
-<%= form_with url: show_reservations_path do |f| %>
+<%= form_with url: show_reservations_path do |form| %>
   <div>
-    <div><%= f.label :seat_numbers %></div>
+    <div><%= form.label :seat_numbers %></div>
     <div>
-      <%= f.collection_check_boxes :seat_numbers, @seats, :number, :number, include_hidden: false do |b| %>
+      <%= form.collection_check_boxes :seat_numbers, @seats, :number, :number, include_hidden: false do |b| %>
         <%= b.check_box disabled: !b.object.available %>
         <%= b.label %>
       <% end %>
@@ -14,8 +14,8 @@
     <% end %>
   </div>
   <div>
-    <%= f.submit "Book reservation" %>
+    <%= form.submit "Book reservation" %>
   </div>
 <% end %>
 
-<%= link_to "Back", show_path(id: @reservation.show.id) %>
+<div><%= link_to "Back", show_path(id: @reservation.show.id) %></div
