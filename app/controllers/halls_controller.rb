@@ -2,7 +2,6 @@
 
 class HallsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
-  after_action :verify_authorized, except: %i[index show]
 
   def index
     @halls = authorize Hall.all
