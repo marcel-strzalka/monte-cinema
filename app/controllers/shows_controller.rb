@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
 class ShowsController < ApplicationController
-  before_action except: %i[index show] do
-    redirect_to movies_path unless manager?
-  end
-  before_action :find_show, only: %i[show destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
+    authorize Show
     @movies = Movie.all
   end
 
-  def show; end
+  def show
+    authorize find_show
+  end
 
   def new
-    @show = Show.new
+    @show = authorize Show.new
   end
 
   def create
-    @show = Show.new(show_params)
+    @show = authorize Show.new(show_params)
 
     if @show.valid? && @show.time_period_doesnt_overlap?
       @show.save
@@ -28,6 +28,8 @@ class ShowsController < ApplicationController
   end
 
   def destroy
+    authorize find_show
+
     @show.destroy
 
     redirect_to shows_path, status: :see_other
