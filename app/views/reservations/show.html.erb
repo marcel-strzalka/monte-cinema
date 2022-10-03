@@ -15,7 +15,7 @@
 <h3>Status: <%= @reservation.status %></h3>
 
 <% if @reservation.booked? %>
-  <% if manager? %>
+  <% if policy(@reservation).confirm? %>
     <div>
       <%=
         link_to "Confirm reservation",
