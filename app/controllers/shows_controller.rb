@@ -6,6 +6,7 @@ class ShowsController < ApplicationController
   def index
     authorize Show
     @movies = Movie.all
+    @reservations = Reservation.relevant_for(current_user) if current_user&.customer?
   end
 
   def show

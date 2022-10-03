@@ -1,5 +1,26 @@
 <h1>Today Shows</h1>
 
+<% if current_user&.customer? %>
+  <% if @reservations.count == 0 %>
+    <h2>No Reservations</h2>
+    <p>We hope you change your mind and see something that's incredible very soon!</p>
+  <% else %>
+    <h2>My Reservations</h2>
+    <div>
+      <ol>
+        <% @reservations.each do |reservation| %>
+          <li>
+            <%= 
+              link_to "#{reservation.show.movie.title} -> #{formatted_datetime reservation.show.start_time}",
+              show_reservation_path(show_id: reservation.show.id, id: reservation.id) 
+            %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  <% end %>
+<% end %>
+
 <div>
   <% @movies.each do |movie| %>
   <h1><%= movie.title %></h1>
