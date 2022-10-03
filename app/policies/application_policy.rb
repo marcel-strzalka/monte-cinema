@@ -15,4 +15,15 @@ class ApplicationPolicy
   def manager?
     user&.manager?
   end
+
+  class Scope
+    def initialize(user, scope)
+      @user = user
+      @scope = scope
+    end
+
+    private
+
+    attr_reader :user, :scope
+  end
 end
