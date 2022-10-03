@@ -15,7 +15,7 @@
     <p class="alert"><%= alert %></p>
 
     <div>
-      <% if current_user %>
+      <% if user_signed_in? %>
         <%= "#{current_user.email} (#{current_user.role})" %>
         <div><%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete } %></div>
       <% else %>
