@@ -11,7 +11,7 @@
 <% end %>
 </div>
 
-<% if manager? %>
+<% if policy(Show).new? %>
   <div><%= link_to "Add new show", new_show_path %></div>
 <% end %>
 

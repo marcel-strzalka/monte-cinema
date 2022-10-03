@@ -8,7 +8,7 @@
 
 <div><%= link_to "Make reservation", new_show_reservation_path(@show) %></div>
 
-<% if manager? %>
+<% if policy(@show).destroy? %>
   <div><%= link_to "Delete", show_path(@show), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></div>
 <% end %>
 
