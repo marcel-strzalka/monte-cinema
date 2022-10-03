@@ -8,4 +8,8 @@ module ApplicationHelper
   def formatted_date(datetime)
     datetime.strftime('%e %B %Y')
   end
+
+  def formatted_datetime(datetime)
+    datetime.strftime('%H:%M %e %B %Y')
+  end
 end
