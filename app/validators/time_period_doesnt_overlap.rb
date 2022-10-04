@@ -13,11 +13,11 @@ class TimePeriodDoesntOverlap
     !overlaps
   end
 
-  private
-
   def initialize(show)
     @show = show
   end
+
+  private
 
   def shows
     Show.where(hall: @show.hall)
