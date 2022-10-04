@@ -14,4 +14,11 @@ class Reservation < ApplicationRecord
     .where.not(status: :canceled)
     .order(:start_time)
   }
+
+  scope :for, lambda { |show|
+    joins(:show)
+    .where(show:)
+    .where.not(status: :canceled)
+    .order(:status)
+  }
 end
