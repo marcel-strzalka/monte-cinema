@@ -26,7 +26,12 @@
   <h1><%= movie.title %></h1>
   <ul>
     <% Show.today_shows(movie).each do |show| %>
-      <li><%= link_to formatted_time(show.start_time), show %></li>
+      <li>
+        <%= link_to formatted_time(show.start_time), show %>
+        <% if policy(Reservation).index? %>
+          | <%= link_to "Reservations", show_reservations_path(show_id: show.id) %>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 <% end %>
