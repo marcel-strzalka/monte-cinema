@@ -18,16 +18,4 @@ class Show < ApplicationRecord
   def time_period
     start_time..end_time
   end
-
-  def time_period_doesnt_overlap?
-    shows = Show.where(hall_id:)
-
-    overlaps = shows.any? do |show|
-      time_period.overlaps?(show.time_period)
-    end
-
-    errors.add(:overlapping_time_period, 'cannot be added') if overlaps
-
-    !overlaps
-  end
 end

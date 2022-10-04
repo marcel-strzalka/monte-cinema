@@ -19,7 +19,7 @@ class ShowsController < ApplicationController
   def create
     @show = authorize Show.new(show_params)
 
-    if @show.valid? && @show.time_period_doesnt_overlap?
+    if @show.valid? && TimePeriodDoesntOverlap.validate(@show)
       @show.save
       redirect_to @show
     else
