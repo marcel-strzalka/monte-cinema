@@ -10,7 +10,7 @@ class Reservation < ApplicationRecord
   scope :relevant_for, lambda { |user|
     joins(:user, :show)
     .where(user:)
-    .where(show: { start_time: Time.zone.now.. })
+    .where('shows.start_time > ?', Time.zone.now)
     .where.not(status: :canceled)
     .order(:start_time)
   }
