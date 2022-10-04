@@ -9,6 +9,10 @@ class ReservationPolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    manager?
+  end
+
   def show?
     customer? || manager?
   end
