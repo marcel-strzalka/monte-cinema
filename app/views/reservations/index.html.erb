@@ -1,0 +1,24 @@
+<h1>
+  Reservations for "<%= @show.movie.title %>" |
+  <%= formatted_datetime @show.start_time %> |
+  Hall "<%= @show.hall.name %>"
+</h1>
+
+<ol>
+  <% @reservations.each do |reservation| %>
+    <li>
+      <div>Email: <%= reservation.user.email %></div>
+      <div>Status: <%= reservation.status %></div>
+      <div>Ticket(s): <%= reservation.tickets.count %></div>
+      <div>
+        Seat number(s):
+        <% reservation.tickets.each do |ticket| %>
+          <%= ticket.seat_number %>
+        <% end %>
+      </div>
+      <div><%= link_to "See more", show_reservation_path(show_id: reservation.show.id, id: reservation.id) %></div>
+    </li>
+  <% end %>
+</ol>
+
+<div><%= link_to "Back", :back %></div>
