@@ -20,7 +20,7 @@ class TimePeriodDoesntOverlap
   private
 
   def shows
-    Show.where(hall: @show.hall)
+    Show.includes(:movie).where(hall: @show.hall)
   end
 
   def overlaps?
