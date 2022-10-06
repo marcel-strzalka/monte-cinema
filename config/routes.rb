@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :movies
   resources :shows, except: [:edit, :update] do
     resources :reservations, only: [:index, :show, :new, :create] do
-      put 'confirm', on: :member
-      delete 'cancel', on: :member
+      patch 'confirm', on: :member
+      patch 'cancel', on: :member
     end
   end
   root to: 'shows#index'
