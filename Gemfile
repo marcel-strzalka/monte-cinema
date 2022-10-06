@@ -50,6 +50,7 @@ group :development do
 
   # Static analyzers, linters and similar
   gem 'brakeman', '~> 5.3.1'
+  gem 'bullet', '~> 7.0.3'
   gem 'lefthook', '~> 1.1.1'
   gem 'rubocop', '~> 1.36.0'
   gem 'rubocop-rails', '~> 2.16.0'
