@@ -3,6 +3,7 @@
 class Show < ApplicationRecord
   belongs_to :hall
   belongs_to :movie
+  has_many :reservations, dependent: :destroy
 
   validates :start_time, presence: true
   validates :start_time, comparison: { greater_than: Time.zone.now }
