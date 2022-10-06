@@ -8,7 +8,9 @@ class Show < ApplicationRecord
   validates :start_time, comparison: { greater_than: Time.zone.now }
 
   scope :today_shows, lambda { |movie|
-    where(movie:).where(start_time: (Time.zone.now..Time.zone.now.midnight + 1.day)).order(:start_time)
+    where(movie:)
+    .where(start_time: (Time.zone.now..Time.zone.now.end_of_day))
+    .order(:start_time)
   }
 
   def end_time
