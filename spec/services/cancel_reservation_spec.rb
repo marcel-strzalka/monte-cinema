@@ -10,7 +10,7 @@ RSpec.describe CancelReservation do
       let(:reservation) { Reservation.new(status: :booked) }
 
       it 'updates status to canceled' do
-        expect { subject }.to change { reservation.status }.from('booked').to('canceled')
+        expect { subject }.to(change { reservation.status }.from('booked').to('canceled'))
       end
     end
 
