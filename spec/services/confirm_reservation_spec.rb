@@ -17,7 +17,7 @@ RSpec.describe ConfirmReservation do
     context 'when reservation is not booked' do
       let(:reservation) { Reservation.new(status: :canceled) }
 
-      it 'does nothing' do
+      it 'does not update status' do
         expect { subject }.to_not(change { reservation.status })
       end
     end
