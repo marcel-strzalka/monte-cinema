@@ -9,14 +9,22 @@ RSpec.describe CreateReservation do
   let(:movie) { create :movie }
   let(:show) { create :show }
   let(:user) { create :user }
-  let(:reservation) { Reservation.new(show:, user:) }
+  let(:reservation) { build(:reservation, show:, user:) }
 
   describe '#call' do
     context 'when seat numbers are empty' do
       let(:seat_numbers) { [] }
 
-      it 'returns false and adds an error' do
+      it 'returns false' do
         expect(subject).to be(false)
+      end
+
+      it 'does not create a reservation' do
+        expect { subject }.to_not(change { Reservation.count })
+      end
+
+      it 'adds an error' do
+        subject
         expect(reservation.errors[:base]).to include('You need to pick at least one seat')
       end
     end
@@ -25,8 +33,16 @@ RSpec.describe CreateReservation do
       shared_examples 'invalid seat number' do |seat_number|
         let(:seat_numbers) { [seat_number] }
 
-        it 'returns false and adds an error' do
+        it 'returns false' do
           expect(subject).to be(false)
+        end
+
+        it 'does not create a reservation' do
+          expect { subject }.to_not(change { Reservation.count })
+        end
+
+        it 'adds an error' do
+          subject
           expect(reservation.errors[:base]).to include('One of provided seats is invalid')
         end
       end
@@ -45,21 +61,40 @@ RSpec.describe CreateReservation do
     end
 
     context 'when seat number is taken' do
+      let!(:existing_reservation) { create(:reservation, show:, user:) }
+      let!(:existing_ticket) { create(:ticket, reservation:, seat_number: 1) }
       let(:seat_numbers) { ['1'] }
 
-      it 'returns false and adds an error' do
-        CreateReservation.new(reservation: Reservation.new(show:, user:), seat_numbers:).call
+      it 'returns false' do
         expect(subject).to be(false)
+      end
+
+      it 'does not create a reservation' do
+        expect { subject }.to_not(change { Reservation.count })
+      end
+
+      it 'adds an error' do
+        subject
         expect(reservation.errors[:base]).to include('One of provided seats is already taken')
       end
     end
 
     context 'when every seat is taken' do
+      let!(:existing_reservation) { create(:reservation, show:, user:) }
+      let!(:existing_first_ticket) { create(:ticket, reservation:, seat_number: 1) }
+      let!(:existing_second_ticket) { create(:ticket, reservation:, seat_number: 2) }
       let(:seat_numbers) { %w[1 2] }
 
-      it 'returns false and adds an error' do
-        CreateReservation.new(reservation: Reservation.new(show:, user:), seat_numbers:).call
+      it 'returns false' do
         expect(subject).to be(false)
+      end
+
+      it 'does not create a reservation' do
+        expect { subject }.to_not(change { Reservation.count })
+      end
+
+      it 'adds an error' do
+        subject
         expect(reservation.errors[:base]).to include('Sorry, no seats are available for this show')
       end
     end
