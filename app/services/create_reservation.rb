@@ -23,10 +23,10 @@ class CreateReservation
 
   def create
     ActiveRecord::Base.transaction do
-      reservation.save
+      reservation.save!
 
       seat_numbers.each do |seat_number|
-        Ticket.create(reservation:, seat_number:)
+        Ticket.create!(reservation:, seat_number:)
       end
     end
 

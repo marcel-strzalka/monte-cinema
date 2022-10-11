@@ -76,4 +76,7 @@ RSpec.configure do |config|
       Bullet.end_request
     end
   end
+
+  # Factory Bot Rails
+  config.include FactoryBot::Syntax::Methods
 end
