@@ -3,22 +3,23 @@
 require 'rails_helper'
 
 RSpec.describe ConfirmReservation do
-  subject { described_class.new(reservation:).call }
+  subject(:confirm_reservation) { described_class.new(reservation:).call }
 
   describe '#call' do
     context 'when reservation is booked' do
-      let(:reservation) { Reservation.new(status: :booked) }
+      let(:reservation) { create(:reservation, status: :booked) }
 
       it 'updates status to confirmed' do
-        expect { subject }.to(change { reservation.status }.from('booked').to('confirmed'))
+        expect { confirm_reservation }.to change(reservation, :status)
+        .from('booked').to('confirmed')
       end
     end
 
     context 'when reservation is not booked' do
-      let(:reservation) { Reservation.new(status: :canceled) }
+      let(:reservation) { create(:reservation, status: :canceled) }
 
       it 'does not update status' do
-        expect { subject }.to_not(change { reservation.status })
+        expect { confirm_reservation }.not_to change(reservation, :status)
       end
     end
   end
