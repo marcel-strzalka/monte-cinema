@@ -16,11 +16,15 @@ class HallsController < ApplicationController
   end
 
   def create
-    @hall = authorize Hall.new(hall_params)
+    @hall = authorize Hall.new
+    result = HallContract.new(hall: @hall).call(params[:hall].to_unsafe_h)
+    @hall.attributes = result.to_h
 
-    if @hall.save
+    if result.success?
+      @hall.save
       redirect_to @hall
     else
+      @errors = result.errors(full: true)
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,10 +35,14 @@ class HallsController < ApplicationController
 
   def update
     authorize find_hall
+    result = HallContract.new(hall: @hall).call(params[:hall].to_unsafe_h)
+    @hall.attributes = result.to_h
 
-    if @hall.update(hall_params)
+    if result.success?
+      @hall.save
       redirect_to @hall
     else
+      @errors = result.errors(full: true)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -48,10 +56,6 @@ class HallsController < ApplicationController
   end
 
   private
-
-  def hall_params
-    params.require(:hall).permit(:name, :capacity)
-  end
 
   def find_hall
     @hall = Hall.find(params[:id])
