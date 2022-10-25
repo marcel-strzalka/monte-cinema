@@ -8,8 +8,8 @@
     <div><%= form.number_field :capacity, min: 1 %></div>
   </div>
   <div>
-    <% hall.errors.any? do |error| %>
-      <%= error.full_message %>
+    <% errors&.any? do |error| %>
+      <%= error.text %>
     <% end %>
   </div>
   <div>
