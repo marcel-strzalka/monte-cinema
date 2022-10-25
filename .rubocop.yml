@@ -25,6 +25,10 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 15
 
+Rails/DeprecatedActiveModelErrorsMethods:
+  Exclude:
+    - 'spec/contracts/*.rb'
+
 Rails/I18nLocaleTexts:
   Enabled: false
 
