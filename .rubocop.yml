@@ -1,4 +1,6 @@
-require: rubocop-rails
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 AllCops:
   TargetRubyVersion: 3.1.2
@@ -18,14 +20,13 @@ Layout/MultilineMethodCallIndentation:
 Metrics/AbcSize:
   Max: 20
 
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*.rb'
-
 Metrics/MethodLength:
   Max: 15
 
 Rails/I18nLocaleTexts:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
 Style/Documentation:
