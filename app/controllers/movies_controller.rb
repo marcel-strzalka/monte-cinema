@@ -16,11 +16,15 @@ class MoviesController < ApplicationController
   end
 
   def create
-    @movie = authorize Movie.new(movie_params)
+    @movie = authorize Movie.new
+    result = MovieContract.new.call(params[:movie].to_unsafe_h)
+    @movie.attributes = result.to_h
 
-    if @movie.save
+    if result.success?
+      @movie.save
       redirect_to @movie
     else
+      @errors = result.errors(full: true)
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,10 +35,14 @@ class MoviesController < ApplicationController
 
   def update
     authorize find_movie
+    result = MovieContract.new.call(params[:movie].to_unsafe_h)
+    @movie.attributes = result.to_h
 
-    if @movie.update(movie_params)
+    if result.success?
+      @movie.save
       redirect_to @movie
     else
+      @errors = result.errors(full: true)
       render :edit, status: :unprocessable_entity
     end
   end
@@ -48,10 +56,6 @@ class MoviesController < ApplicationController
   end
 
   private
-
-  def movie_params
-    params.require(:movie).permit(:title, :length_in_minutes)
-  end
 
   def find_movie
     @movie = Movie.find(params[:id])

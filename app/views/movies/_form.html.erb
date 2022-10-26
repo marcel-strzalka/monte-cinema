@@ -8,8 +8,8 @@
     <div><%= form.number_field :length_in_minutes, in: 1..300 %></div>
   </div>
   <div>
-    <% movie.errors.any? do |error| %>
-      <%= error.full_message %>
+    <% errors&.any? do |error| %>
+      <%= error.text %>
     <% end %>
   </div>
   <div>
