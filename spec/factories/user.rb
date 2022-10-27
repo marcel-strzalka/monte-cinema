@@ -5,5 +5,9 @@ FactoryBot.define do
     email { 'user@gmail.com' }
     password { 'rubycamp2022' }
     role { 'customer' }
+
+    trait :manager do
+      role { 'manager' }
+    end
   end
 end
